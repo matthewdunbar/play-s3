@@ -12,7 +12,7 @@ publishMavenStyle := true
 lazy val root = (project in file("."))
   .settings(
     name := "play-s3",
-    organization := "net.kaliber",
+    organization := "com.lifeway.cp",
     scalaVersion := "2.13.10",
     version := playVersion,
     libraryDependencies ++= Seq(
@@ -26,6 +26,19 @@ lazy val root = (project in file("."))
       "com.typesafe.play" % "shaded-asynchttpclient" % "2.0.1" % "provided"
     )
   )
+
+resolvers ++= Seq(
+  Resolver.url("Typesafe Ivy releases", url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns),
+  "Typesafe Releases" at "https://repo.typesafe.com/typesafe/releases/",
+  "Scalaz Bintray Repo" at "https://dl.bintray.com/scalaz/releases",
+  "Maven Lib" at "https://mvnrepository.com/artifact/",
+  DefaultMavenRepository,
+  "Java.net Maven2 Repository" at "https://download.java.net/maven/2/",
+  Resolver.jcenterRepo,
+  Resolver.bintrayRepo("dwhjames", "maven"),
+  "Lifeway Repo External Libs" at "https://artifactory.prod.lifeway.com/artifactory/ext-release-local/",
+  "Lifeway Repo Internal Libs" at "https://artifactory.prod.lifeway.com/artifactory/libs-release-local/"
+)
 
 scalacOptions ++= Seq("-feature", "-deprecation")
 
