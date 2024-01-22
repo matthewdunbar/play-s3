@@ -169,7 +169,7 @@ class S3BucketSpec extends S3SpecSetup {
     "be able to retrieve the private file using the generated url" inApp {
 
       WsTestClient.withClient { client =>
-        val result = client.url(url).get
+        val result = client.url(url).get()
 
         val value = await(result)
         value.status must_== 200
@@ -371,6 +371,7 @@ class S3BucketSpec extends S3SpecSetup {
               CONTENT_TYPE -> expectedContentType
             case FormElement(name, value, false) =>
               name -> value
+            case _ => throw new Exception("Unexpected form element")
           }
 
       val expectedContent = "test text"

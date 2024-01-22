@@ -89,7 +89,7 @@ class S3(val client:S3Client) {
     client
       .resourceRequest(bucketName, sourcePath)
       .addQueryStringParameters("acl" -> "")
-      .get
+      .get()
 
   /**
    * Lowlevel method to call get on a bucket or a specific file
@@ -116,7 +116,7 @@ class S3(val client:S3Client) {
         (prefix.map("prefix" -> _).toList :::
           delimiter.map("delimiter" -> _).toList :::
           marker.map("marker" -> _).toList): _*)
-      .get
+      .get()
 
   /**
    * Lowlevel method to call head on a specific file
@@ -130,7 +130,7 @@ class S3(val client:S3Client) {
 
     client
       .resourceRequest(bucketName, path)
-      .head
+      .head()
 
   /**
    * Lowlevel method to call delete on a bucket in order to delete a file
@@ -143,7 +143,7 @@ class S3(val client:S3Client) {
   def delete(bucketName: String, path: String)(implicit executionContext: ExecutionContext): Future[WSResponse] =
     client
       .resourceRequest(bucketName, path)
-      .delete
+      .delete()
 
   /**
    * Lowlevel method to create an authenticated url to a specific file
@@ -235,7 +235,7 @@ class S3(val client:S3Client) {
       .resourceRequest(bucketName, uploadTicket.name)
       .addQueryStringParameters(
         "uploadId" -> uploadTicket.uploadId)
-      .delete
+      .delete()
   }
 
   /**

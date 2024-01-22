@@ -44,7 +44,7 @@ object AwsCredentialsSpec extends Specification {
     def checkImplicit()(implicit c: AwsCredentials) = c
 
     "provide an implicit value" in {
-      checkImplicit must not beNull
+      checkImplicit() must not beNull
     }
 
     "override the implicit" in {

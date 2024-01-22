@@ -76,7 +76,7 @@ case class Bucket(
    * @param itemName  The name of the item you want to receive the headers from
    */
   def getHeadersOf(itemName: String)(implicit executionContext: ExecutionContext): Future[Map[String, Seq[String]]] =
-    s3.head(name, itemName) map (_.headers)
+    s3.head(name, itemName) map (_.headers.map(v => (v._1, v._2.toSeq)).toMap)
 
   /**
    * Lists the contents of the bucket
